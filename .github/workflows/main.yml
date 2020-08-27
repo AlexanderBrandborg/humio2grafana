@@ -37,13 +37,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: "installs"
+      run: | 
+        npm install -g yarn 
+        apt-get install zip
+    - name: "build project"
+      run: |
+        yarn install
+        yarn run grafana-toolkit plugin:dev
+        cp -r dist humio2grafana
+        zip -r humio2grafana.zip humio2grafana
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: LICENSE
-        asset_name: MyTest
-        tag: v3.0.10
+        file: humio2grafana.zip
+        asset_name: humio2grafana
+        tag: v3.0.11
         overwrite: true
-        body: "This is my release text"
+        body: "Automatically released. Check Changelog for updates"
   
