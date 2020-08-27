@@ -55,7 +55,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: humio2grafana.zip
         asset_name: humio2grafana.zip
-        tag: $RELEASE_VERSION
+        tag: ${{ env.RELEASE_VERSION }}
         overwrite: true
         body: "Automatically released. Check Changelog for updates"
   
