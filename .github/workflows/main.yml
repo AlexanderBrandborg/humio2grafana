@@ -41,9 +41,9 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: License
+        file: LICENSE
         asset_name: MyTest
-        tag: v3.0.9
+        tag: v3.0.10
         overwrite: true
         body: "This is my release text"
   
