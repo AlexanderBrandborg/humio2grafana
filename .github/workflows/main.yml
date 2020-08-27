@@ -37,6 +37,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: 'Get Previous tag'
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@master"
     - name: "installs"
       run: | 
         sudo npm install -g yarn 
@@ -57,7 +60,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: humio2grafana.zip
         asset_name: humio2grafana.zip
-        tag: ${{ env.RELEASE_VERSION }}
+        tag: ${{ steps.previoustag.outputs.tag }}
         overwrite: true
         body: "Automatically released. Check Changelog for updates"
   
