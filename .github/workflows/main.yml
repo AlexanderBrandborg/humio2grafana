@@ -29,3 +29,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "cat package.json"
         run: cat ./package.json
+
+  publish:
+    name: Publish binaries
+    runs-on: ubuntu-latest
+    needs: [bump-version]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --release
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: License
+        asset_name: MyTest
+        tag: v3.0.8
+        overwrite: true
+        body: "This is my release text"
+  
